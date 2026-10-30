@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#15161A">
+    <title>Johana & Oscar - Nuestra Boda</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF7F2',
+                        blush: '#F4EBE8',
+                        blushDark: '#E8D5D0',
+                        sage: '#8A9A86',
+                        sageLight: '#EBF0EA',
+                        gold: '#F6B08A',
+                        goldHover: '#E99A70',
+                        slateDark: '#F3EEE6',
+                        slateMuted: '#B9B6B0',
+                        tint: '#33343B',
+                        tintDark: '#5E4A40',
+                        deep: '#F6B08A',
+                        goldLight: '#FFD3B8'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                        script: ['"Pinyon Script"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Fondo negro perla con destellos suaves */
+        body {
+            background-color: #15161A;
+            background-image:
+                radial-gradient(circle at 15% 8%, rgba(165,165,185,0.17), transparent 50%),
+                radial-gradient(circle at 88% 55%, rgba(246,176,138,0.09), transparent 45%),
+                radial-gradient(circle at 20% 95%, rgba(165,165,185,0.14), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Floating Petals Canvas */
+        #petals-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: rgba(38, 39, 45, 0.90);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(246,176,138, 0.30);
+        }
+
+        /* Elegant Shadow */
+        .soft-shadow {
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.45), 0 5px 15px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Smooth Text Selection */
+        ::selection {
+            background-color: #F6B08A;
+            color: #15161A;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #15161A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F6B08A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD3B8;
+        }
+    </style>
+</head>
+<body class="text-slateDark font-sans antialiased relative overflow-x-hidden">
+
+    <!-- Petals Canvas Animation -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- Audio Player Toggle Floating Button -->
+    <div class="fixed top-5 right-5 z-50">
+        <button id="musicToggleBtn" onclick="toggleAudio()" class="glass-card hover:bg-[#33343B] text-slateDark p-3 rounded-full shadow-lg border border-gold/30 flex items-center justify-center transition-all duration-300 transform hover:scale-105" title="Reproducir / Pausar Música">
+            <svg id="musicSvg" class="text-gold text-lg inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M468 7c7.6 6.1 12 15.3 12 25l0 304c0 44.2-43 80-96 80s-96-35.8-96-80 43-80 96-80c11.2 0 22 1.6 32 4.6l0-116.7-224 49.8 0 206.3c0 44.2-43 80-96 80s-96-35.8-96-80 43-80 96-80c11.2 0 22 1.6 32 4.6L128 96c0-15 10.4-28 25.1-31.2l288-64c9.5-2.1 19.4 .2 27 6.3z"/></svg><svg id="pauseSvg" class="text-gold text-lg hidden inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80L0 432c0 26.5 21.5 48 48 48l64 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48L48 32zm224 0c-26.5 0-48 21.5-48 48l0 352c0 26.5 21.5 48 48 48l64 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48l-64 0z"/></svg>
+        </button>
+        <!-- Background Audio (Placeholder Royalty Free Romantic Track) -->
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-piano-112199.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-4xl mx-auto px-4 py-8 md:py-12 relative z-20 space-y-16 md:space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="text-center min-h-[85vh] flex flex-col justify-center items-center py-12 relative">
+            
+            <!-- Delicate Floral Ornament Top -->
+            <div class="w-32 md:w-48 mb-6 opacity-80">
+                <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto stroke-gold">
+                    <path d="M100 30C80 30 60 10 30 10C10 10 0 30 0 30C0 30 10 50 30 50C60 50 80 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M100 30C120 30 140 10 170 10C190 10 200 30 200 30C200 30 190 50 170 50C140 50 120 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
+                    <circle cx="100" cy="30" r="4" fill="#F6B08A"/>
+                    <circle cx="70" cy="25" r="2" fill="#FFD3B8"/>
+                    <circle cx="130" cy="25" r="2" fill="#FFD3B8"/>
+                </svg>
+            </div>
+
+            <p class="font-sans uppercase tracking-[0.3em] text-xs md:text-sm text-goldLight font-medium mb-3">
+                ¡Nos Casamos!
+            </p>
+
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl text-cream font-light tracking-tight my-2">
+                Johana <span class="font-script text-gold text-4xl sm:text-6xl md:text-7xl block sm:inline my-2 sm:my-0">&</span> Oscar
+            </h1>
+
+            <p class="font-serif italic text-lg sm:text-xl md:text-2xl text-cream/80 max-w-md mx-auto my-6 font-light px-4">
+                "El amor no contempla con los ojos, sino con el alma."
+            </p>
+
+            <!-- Save The Date Badge -->
+            <div class="mt-4 inline-flex items-center space-x-3 border-y border-gold/40 py-2 px-8">
+                <span class="font-sans uppercase tracking-widest text-xs md:text-sm font-semibold text-cream">Sábado</span>
+                <span class="text-gold text-xs">•</span>
+                <span class="font-serif text-2xl md:text-3xl text-gold font-semibold tracking-wider">21 DE AGOSTO</span>
+                <span class="text-gold text-xs">•</span>
+                <span class="font-sans uppercase tracking-widest text-xs md:text-sm font-semibold text-cream">2027</span>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#detalles" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                <span class="text-[10px] uppercase tracking-widest text-cream/70 mb-1">Ver detalles</span>
+                <svg class="text-gold text-xs inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+            </a>
+        </section>
+
+
+        <!-- COUNTDOWN TIMER SECTION -->
+        <section class="glass-card rounded-3xl p-6 md:p-10 text-center soft-shadow relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-gold/15 rounded-full blur-2xl -z-10"></div>
+            <div class="absolute -left-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl -z-10"></div>
+
+            <h2 class="font-serif text-2xl md:text-3xl text-slateDark mb-2">Cuenta Regresiva</h2>
+            <p class="text-xs uppercase tracking-widest text-deep mb-8 font-medium">Faltan muy pocos días para el gran momento</p>
+
+            <!-- Timer Grid -->
+            <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-xl mx-auto">
+                <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
+                    <span id="days" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Días</span>
+                </div>
+                <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
+                    <span id="hours" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Horas</span>
+                </div>
+                <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
+                    <span id="minutes" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Minutos</span>
+                </div>
+                <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
+                    <span id="seconds" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Segundos</span>
+                </div>
+            </div>
+
+            <!-- Add to Calendar Button -->
+            <div class="mt-8">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Oscar+y+Johana&dates=20270821T220000Z/20270822T080000Z&details=Acompa%C3%B1anos+a+celebrar+nuestra+boda.&location=Iglesia+Santa+Teresita%2C+https%3A%2F%2Fmaps.app.goo.gl%2FUT7s9SwUBvTgqtya7" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="inline-flex items-center space-x-2 text-xs uppercase tracking-wider text-slateDark hover:text-gold border-b border-gold/50 pb-1 transition-colors duration-300">
+                    <svg class="text-gold inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M120 0c13.3 0 24 10.7 24 24l0 40 160 0 0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-40c0-13.3 10.7-24 24-24zm0 112l-56 0c-8.8 0-16 7.2-16 16l0 288c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-288c0-8.8-7.2-16-16-16l-264 0zm104 64c13.3 0 24 10.7 24 24l0 48 48 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-48 0 0 48c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-48-48 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0 0-48c0-13.3 10.7-24 24-24z"/></svg>
+                    <span>Agregar a Google Calendar</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ELEGANT MONTHLY CALENDAR (Agosto 2027) -->
+            <div class="max-w-sm mx-auto bg-[#26272D]/95 p-6 rounded-2xl border border-gold/20 shadow-sm relative">
+                <!-- Top Date Banner -->
+                <div class="flex items-center justify-between border-b border-slateDark/20 pb-3 mb-4 font-serif">
+                    <span class="text-xs uppercase tracking-widest text-slateDark/70">SÁBADO</span>
+                    <span class="text-4xl font-bold text-slateDark">21</span>
+                    <span class="text-xs uppercase tracking-widest text-slateDark/70">2027</span>
+                </div>
+
+                <p class="font-script text-2xl text-gold mb-1">El gran día</p>
+                <h3 class="font-serif text-xl tracking-widest uppercase text-slateDark font-semibold mb-6">AGOSTO 2027</h3>
+
+                <!-- Days of Week Header -->
+                <div class="grid grid-cols-7 gap-1 text-[11px] font-semibold text-slateDark/60 uppercase tracking-wider mb-3">
+                    <div>DOM</div>
+                    <div>LUN</div>
+                    <div>MAR</div>
+                    <div>MIÉ</div>
+                    <div>JUE</div>
+                    <div>VIE</div>
+                    <div>SÁB</div>
+                </div>
+
+                <!-- Calendar Grid for August 2027 (Starts Sunday Aug 1) -->
+                <div class="grid grid-cols-7 gap-1 text-sm font-serif text-slateDark/80">
+                    <div class="p-1">1</div>
+                    <div class="p-1">2</div>
+                    <div class="p-1">3</div>
+                    <div class="p-1">4</div>
+                    <div class="p-1">5</div>
+                    <div class="p-1">6</div>
+                    <div class="p-1">7</div>
+                    <div class="p-1">8</div>
+                    <div class="p-1">9</div>
+                    <div class="p-1">10</div>
+                    <div class="p-1">11</div>
+                    <div class="p-1">12</div>
+                    <div class="p-1">13</div>
+                    <div class="p-1">14</div>
+                    <div class="p-1">15</div>
+                    <div class="p-1">16</div>
+                    <div class="p-1">17</div>
+                    <div class="p-1">18</div>
+                    <div class="p-1">19</div>
+                    <div class="p-1">20</div>
+                    
+                    <!-- Highlighted Date: 21 with Red Heart -->
+                    <div class="relative p-1 flex items-center justify-center font-bold text-red-400">
+                        <span class="relative z-10">21</span>
+                        <!-- SVG Heart Outline in Red -->
+                        <svg class="absolute inset-0 w-full h-full text-red-400 scale-125 pointer-events-none drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+
+                    <div class="p-1">22</div>
+                    <div class="p-1">23</div>
+                    <div class="p-1">24</div>
+                    <div class="p-1">25</div>
+                    <div class="p-1">26</div>
+                    <div class="p-1">27</div>
+                    <div class="p-1">28</div>
+                    <div class="p-1">29</div>
+                    <div class="p-1">30</div>
+                    <div class="p-1">31</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SCHEDULE & LOCATIONS SECTION -->
+        <section class="space-y-8">
+            <div class="text-center space-y-2">
+                <h2 class="font-serif text-3xl md:text-4xl text-cream">Dónde & Cuándo</h2>
+                <div class="w-12 h-0.5 bg-gold mx-auto rounded-full"></div>
+                <p class="text-xs uppercase tracking-widest text-cream/70">Detalles del Evento</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                
+                <!-- Ceremony Card -->
+                <div class="glass-card rounded-3xl p-8 text-center soft-shadow flex flex-col justify-between border border-white hover:border-gold/30 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 bg-tint border border-tintDark rounded-full flex items-center justify-center mx-auto text-gold text-xl shadow-inner">
+                            <svg class="inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M280-8c0-13.3-10.7-24-24-24S232-21.3 232-8l0 24-32 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l32 0 0 48-98.6 65.8C120 186.7 112 201.6 112 217.7l0 38.3-79.8 45.6C12.3 313 0 334.2 0 357.1L0 448c0 35.3 28.7 64 64 64 74.7 0 85.4 0 320 0l64 0c35.3 0 64-28.7 64-64l0-90.9c0-23-12.3-44.2-32.2-55.6L400 256 400 217.7c0-16-8-31-21.4-39.9l-98.6-65.8 0-48 32 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-32 0 0-24zM256 320c35.3 0 64 28.7 64 64l0 80-128 0 0-80c0-35.3 28.7-64 64-64z"/></svg>
+                        </div>
+                        <span class="inline-block px-3 py-1 bg-tint text-deep border border-tintDark text-[11px] font-semibold uppercase tracking-widest rounded-full">
+                            Ceremonia Religiosa
+                        </span>
+                        <h3 class="font-serif text-2xl text-slateDark">Iglesia Santa Teresita</h3>
+                        <p class="font-serif text-3xl text-gold font-medium">05:00 PM</p>
+                        <p class="text-sm text-slateMuted leading-relaxed px-4">
+                            Cra. 18A # 43a-59, Teusaquillo, Bogotá<br>
+                            Sábado, 21 de Agosto
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-tintDark">
+                        <a href="https://maps.app.goo.gl/UT7s9SwUBvTgqtya7" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#15161A] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
+                            <svg class="text-gold group-hover:text-[#15161A] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
+                            <span>Ver ubicación en Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reception Card -->
+                <div class="glass-card rounded-3xl p-8 text-center soft-shadow flex flex-col justify-between border border-white hover:border-gold/30 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 bg-tint border border-tintDark rounded-full flex items-center justify-center mx-auto text-gold text-xl shadow-inner">
+                            <svg class="inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M155.6 17.3C163 3 179.9-3.6 195 1.9l125 45.6 125-45.6c15.1-5.5 32 1.1 39.4 15.4l78.8 152.9c28.8 55.8 10.3 122.3-38.5 156.6l31.3 86.2 41-15c16.6-6 35 2.5 41 19.1s-2.5 35-19.1 41c-47.4 17.3-94.8 34.5-142.2 51.8-16.6 6.1-35-2.5-41-19.1s2.5-35 19.1-41l41-15-31.3-86.2c-59.4 5.2-116.2-33.9-130-95.2l-14.6-64.7-14.6 64.7c-13.8 61.3-70.6 100.4-130 95.2l-31.3 86.2 41 15c16.6 6.1 25.2 24.4 19.1 41s-24.4 25.2-41 19.1c-47.4-17.3-94.8-34.6-142.2-51.8-16.6-6.1-25.2-24.4-19.1-41S26.3 392 42.9 398l41 15 31.3-86.2C66.5 292.5 48.1 226 76.9 170.2L155.6 17.3zm44 54.4l-27.2 52.8 89.2 32.5 13.1-57.9-75.1-27.4zm240.9 0l-75.1 27.4 13.1 57.9 89.2-32.5-27.2-52.8z"/></svg>
+                        </div>
+                        <span class="inline-block px-3 py-1 bg-tint text-deep border border-tintDark text-[11px] font-semibold uppercase tracking-widest rounded-full">
+                            Recepción & Fiesta
+                        </span>
+                        <h3 class="font-serif text-2xl text-slateDark">Eventos y Convenciones Berrio - Sede Palermo</h3>
+                        <p class="font-serif text-3xl text-gold font-medium">08:00 PM</p>
+                        <p class="text-sm text-slateMuted leading-relaxed px-4">
+                            Av Caracas # 44 -21, Teusaquillo, Bogotá<br>
+                            Sábado, 21 de Agosto
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-tintDark">
+                        <a href="https://maps.app.goo.gl/z6CTh4fcW3beVi4SA" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#15161A] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
+                            <svg class="text-gold group-hover:text-[#15161A] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
+                            <span>Ver ubicación en Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- DRESS CODE & GIFT DETAILS -->
+        <section class="grid sm:grid-cols-2 gap-6">
+            <!-- Dress Code -->
+            <div class="bg-[#26272D]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
+                <svg class="text-2xl text-gold mb-3 inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M224 248a120 120 0 1 1 0-240 120 120 0 1 1 0 240zm-30.5 56l61 0c9.7 0 17.5 7.8 17.5 17.5 0 4.2-1.5 8.2-4.2 11.4l-27.4 32 31 115.1 .6 0 34.6-138.5c2.2-8.7 11.1-14 19.5-10.8 61.9 23.6 105.9 83.6 105.9 153.8 0 15.1-12.3 27.4-27.4 27.4L43.4 512c-15.1 0-27.4-12.3-27.4-27.4 0-70.2 44-130.2 105.9-153.8 8.4-3.2 17.3 2.1 19.5 10.8l34.6 138.5 .6 0 31-115.1-27.4-32c-2.7-3.2-4.2-7.2-4.2-11.4 0-9.7 7.8-17.5 17.5-17.5z"/></svg>
+                <h4 class="font-serif text-xl text-slateDark mb-1">Código de Vestimenta</h4>
+                <p class="text-xs uppercase tracking-widest text-deep font-semibold mb-2">Rigurosa Etiqueta / Formal</p>
+                <p class="text-xs text-slateMuted">
+                    Queremos que lucir espectaculares sea parte del recuerdo. Traje formal para caballeros y vestido para damas.
+                    Con cariño nos reservamos los colores Blanco y Azul.
+                </p>
+                <div class="flex items-center justify-center gap-6 mt-4">
+                    <img src="data:image/png;base64,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" alt="Vestido blanco" title="Blanco reservado" class="h-10 w-auto">
+                    <img src="data:image/png;base64,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" alt="Traje azul" title="Azul reservado" class="h-10 w-auto">
+                </div>
+            </div>
+
+            <!-- Gift / Lluvia de Sobres -->
+            <div class="bg-[#26272D]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
+                <svg class="text-2xl text-gold mb-3 inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M288 33.9L96.4 175.8 254.5 293c5.3 3.9 11.2 6.9 17.5 8.7L272 464c0 5.5 .5 10.8 1.3 16L96 480c-35.3 0-64-28.7-64-64l0-239.9c0-20.3 9.6-39.4 25.9-51.4L254.5-21c9.7-7.2 21.4-11 33.5-11s23.8 3.9 33.5 11L518.1 124.7c7.2 5.3 13.1 12 17.4 19.6-2.5-.2-5-.3-7.5-.3L436.6 144 288 33.9zM320 240c0-26.5 21.5-48 48-48l160 0c26.5 0 48 21.5 48 48l0 224c0 26.5-21.5 48-48 48l-160 0c-26.5 0-48-21.5-48-48l0-224zm80 16c-13.3 0-24 10.7-24 24s10.7 24 24 24l96 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-96 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l56 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-56 0z"/></svg>
+                <h4 class="font-serif text-xl text-slateDark mb-1">Regalos</h4>
+                <p class="text-xs uppercase tracking-widest text-deep font-semibold mb-2">Lluvia de Sobres</p>
+                <p class="text-xs text-slateMuted">
+                    Nuestro mejor regalo es tu presencia, pero si deseas hacernos un detalle, contaremos con buzón para sobres el día del evento.
+                </p>
+                <div class="flex items-center justify-center mt-4">
+                    <svg class="h-10 w-auto" viewBox="0 0 60 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sobre con corazón">
+                        <rect x="3" y="5" width="54" height="34" rx="4" fill="#33343B" stroke="#F6B08A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M3.8 7.5L30 25L56.2 7.5" stroke="#F6B08A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 37L22 21M56 37L38 21" stroke="#F6B08A" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+                        <path d="M30 31.5C30 31.5 24.5 27.6 24.5 24.4C24.5 22.6 25.9 21.4 27.5 21.4C28.6 21.4 29.5 22 30 22.9C30.5 22 31.4 21.4 32.5 21.4C34.1 21.4 35.5 22.6 35.5 24.4C35.5 27.6 30 31.5 30 31.5Z" fill="#F6B08A"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- RSVP SECTION -->
+        <section class="glass-card rounded-3xl p-8 md:p-12 text-center soft-shadow relative overflow-hidden border border-gold/20">
+            <div class="max-w-xl mx-auto space-y-6">
+                
+                <div class="w-12 h-12 bg-tint border border-tintDark rounded-full flex items-center justify-center mx-auto text-gold text-lg">
+                    <svg class="inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/></svg>
+                </div>
+
+                <h2 class="font-serif text-3xl md:text-4xl text-slateDark">Confirmación de Asistencia</h2>
+                
+                <p class="text-sm text-slateMuted leading-relaxed">
+                    Por favor, confírmanos tu asistencia antes del <b>21 de Julio</b> para preparar todos los detalles de este gran día con mucho cariño.
+                </p>
+
+                <!-- RSVP Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <!-- Google Forms Button -->
+                    <a href="https://forms.gle/TiX12SA6t9xrJ1su6" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full sm:w-auto min-w-[220px] bg-gold hover:bg-goldHover text-[#15161A] py-4 px-8 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg font-sans text-xs uppercase tracking-widest font-semibold flex items-center justify-center space-x-2 transform hover:-translate-y-0.5">
+                        <svg class="text-base inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zM374 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L221.1 315.2 169 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.8 7.5 18.8 7s13.4-4.1 17.5-9.8L379.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"/></svg>
+                        <span>Confirmar Asistencia</span>
+                    </a>
+
+                    <!-- Direct WhatsApp RSVP Option -->
+                    <a href="https://wa.me/573208113996?text=%C2%A1Hola!%20Deseo%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Johana%20y%20Oscar.%0A%0ANombres%20y%20apellidos:%20%0ANumero%20de%20acompa%C3%B1antes:%20%0ANombres%20de%20los%20acompa%C3%B1antes:%20"
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full sm:w-auto min-w-[220px] bg-tint hover:bg-tintDark text-slateDark py-4 px-8 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm font-sans text-xs uppercase tracking-widest font-semibold flex items-center justify-center space-x-2">
+                        <svg class="text-emerald-400 text-base inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                        <span>Confirmar por WhatsApp</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FOOTER / CLOSING -->
+        <footer class="text-center space-y-4 pt-8 pb-12">
+            <p class="font-script text-4xl text-gold">Johana & Oscar</p>
+            <p class="text-xs uppercase tracking-widest text-cream/70">
+                ¡Esperamos contar con tu valiosa presencia!
+            </p>
+            <div class="text-[10px] text-cream/60 pt-4">
+                Con ❤️ para nuestra familia y amigos
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. COUNTDOWN TIMER LOGIC ---
+        // Date: August 21st, 2027 - 05:00 PM (17:00:00)
+        const weddingDate = new Date('August 21, 2027 17:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = `
+                    <div class="col-span-4 py-4">
+                        <p class="font-serif text-2xl text-gold">¡El gran día ha llegado!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        // Run countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+
+        // --- 2. AUDIO TOGGLE LOGIC ---
+        let isPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicSvg = document.getElementById('musicSvg');
+        const pauseSvg = document.getElementById('pauseSvg');
+        function showMusicIcon(playing) {
+            musicSvg.classList.toggle('hidden', playing);
+            pauseSvg.classList.toggle('hidden', !playing);
+        }
+
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+                showMusicIcon(false);
+            } else {
+                bgMusic.play().then(() => {
+                    showMusicIcon(true);
+                }).catch(err => {
+                    console.log("Audio play blocked by browser interaction policy.");
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+
+        // --- 3. FLOATING PETALS CANVAS ANIMATION ---
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class Petal {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height - height;
+                this.size = Math.random() * 8 + 6;
+                this.speedY = Math.random() * 1 + 0.5;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 0.02 - 0.01;
+                this.opacity = Math.random() * 0.4 + 0.5;
+                // Pétalos suaves sobre fondo negro perla
+                this.color = Math.random() > 0.5 ? '#F6B08A' : '#E8D9D0';
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.angle += this.spin;
+
+                if (this.y > height) {
+                    this.y = -10;
+                    this.x = Math.random() * width;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                // Draw petal shape
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size, -this.size / 2, -this.size, this.size, 0, this.size);
+                ctx.bezierCurveTo(this.size, this.size, this.size, -this.size / 2, 0, 0);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        const petals = Array.from({ length: 25 }, () => new Petal());
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, width, height);
+            petals.forEach(petal => {
+                petal.update();
+                petal.draw();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+
+        window.onload = function() {
+            animatePetals();
+        };
+    </script>
+</body>
+</html>
