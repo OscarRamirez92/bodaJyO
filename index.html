@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#15161A">
+    <meta name="theme-color" content="#0A1833">
     <title>Johana & Oscar - Nuestra Boda</title>
     
     <!-- Tailwind CSS CDN -->
@@ -23,19 +23,19 @@
             theme: {
                 extend: {
                     colors: {
-                        cream: '#FAF7F2',
+                        cream: '#FFFFFF',
                         blush: '#F4EBE8',
                         blushDark: '#E8D5D0',
                         sage: '#8A9A86',
                         sageLight: '#EBF0EA',
-                        gold: '#F6B08A',
-                        goldHover: '#E99A70',
-                        slateDark: '#F3EEE6',
-                        slateMuted: '#B9B6B0',
-                        tint: '#33343B',
-                        tintDark: '#5E4A40',
-                        deep: '#F6B08A',
-                        goldLight: '#FFD3B8'
+                        gold: '#C9D1DC',
+                        goldHover: '#E4E9F0',
+                        slateDark: '#F8FAFC',
+                        slateMuted: '#AEB9CC',
+                        tint: '#1B3263',
+                        tintDark: '#2E4778',
+                        deep: '#C9D1DC',
+                        goldLight: '#EEF1F6'
                     },
                     fontFamily: {
                         serif: ['"Cormorant Garamond"', 'serif'],
@@ -49,13 +49,13 @@
     
     <!-- Custom Styles -->
     <style>
-        /* Fondo negro perla con destellos suaves */
+        /* Fondo azul marino con destellos suaves en plata */
         body {
-            background-color: #15161A;
+            background-color: #0A1833;
             background-image:
-                radial-gradient(circle at 15% 8%, rgba(165,165,185,0.17), transparent 50%),
-                radial-gradient(circle at 88% 55%, rgba(246,176,138,0.09), transparent 45%),
-                radial-gradient(circle at 20% 95%, rgba(165,165,185,0.14), transparent 50%);
+                radial-gradient(circle at 15% 8%, rgba(60,105,200,0.28), transparent 50%),
+                radial-gradient(circle at 88% 55%, rgba(201,209,220,0.10), transparent 45%),
+                radial-gradient(circle at 20% 95%, rgba(60,105,200,0.22), transparent 50%);
             background-attachment: fixed;
         }
 
@@ -72,10 +72,10 @@
 
         /* Glassmorphism Effect */
         .glass-card {
-            background: rgba(38, 39, 45, 0.90);
+            background: rgba(18, 36, 76, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(246,176,138, 0.30);
+            border: 1px solid rgba(201,209,220, 0.30);
         }
 
         /* Elegant Shadow */
@@ -85,8 +85,8 @@
 
         /* Smooth Text Selection */
         ::selection {
-            background-color: #F6B08A;
-            color: #15161A;
+            background-color: #C9D1DC;
+            color: #0A1833;
         }
 
         /* Custom Scrollbar */
@@ -94,14 +94,14 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #15161A;
+            background: #0A1833;
         }
         ::-webkit-scrollbar-thumb {
-            background: #F6B08A;
+            background: #C9D1DC;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #FFD3B8;
+            background: #EEF1F6;
         }
     </style>
 </head>
@@ -112,7 +112,7 @@
 
     <!-- Audio Player Toggle Floating Button -->
     <div class="fixed top-5 right-5 z-50">
-        <button id="musicToggleBtn" onclick="toggleAudio()" class="glass-card hover:bg-[#33343B] text-slateDark p-3 rounded-full shadow-lg border border-gold/30 flex items-center justify-center transition-all duration-300 transform hover:scale-105" title="Reproducir / Pausar Música">
+        <button id="musicToggleBtn" onclick="toggleAudio()" class="glass-card hover:bg-[#1B3263] text-slateDark p-3 rounded-full shadow-lg border border-gold/30 flex items-center justify-center transition-all duration-300 transform hover:scale-105" title="Reproducir / Pausar Música">
             <svg id="musicSvg" class="text-gold text-lg inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M468 7c7.6 6.1 12 15.3 12 25l0 304c0 44.2-43 80-96 80s-96-35.8-96-80 43-80 96-80c11.2 0 22 1.6 32 4.6l0-116.7-224 49.8 0 206.3c0 44.2-43 80-96 80s-96-35.8-96-80 43-80 96-80c11.2 0 22 1.6 32 4.6L128 96c0-15 10.4-28 25.1-31.2l288-64c9.5-2.1 19.4 .2 27 6.3z"/></svg><svg id="pauseSvg" class="text-gold text-lg hidden inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80L0 432c0 26.5 21.5 48 48 48l64 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48L48 32zm224 0c-26.5 0-48 21.5-48 48l0 352c0 26.5 21.5 48 48 48l64 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48l-64 0z"/></svg>
         </button>
         <!-- Background Audio (Placeholder Royalty Free Romantic Track) -->
@@ -132,9 +132,9 @@
                 <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto stroke-gold">
                     <path d="M100 30C80 30 60 10 30 10C10 10 0 30 0 30C0 30 10 50 30 50C60 50 80 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
                     <path d="M100 30C120 30 140 10 170 10C190 10 200 30 200 30C200 30 190 50 170 50C140 50 120 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
-                    <circle cx="100" cy="30" r="4" fill="#F6B08A"/>
-                    <circle cx="70" cy="25" r="2" fill="#FFD3B8"/>
-                    <circle cx="130" cy="25" r="2" fill="#FFD3B8"/>
+                    <circle cx="100" cy="30" r="4" fill="#C9D1DC"/>
+                    <circle cx="70" cy="25" r="2" fill="#EEF1F6"/>
+                    <circle cx="130" cy="25" r="2" fill="#EEF1F6"/>
                 </svg>
             </div>
 
@@ -208,7 +208,7 @@
         </section>
 
         <!-- ELEGANT MONTHLY CALENDAR (Agosto 2027) -->
-            <div class="max-w-sm mx-auto bg-[#26272D]/95 p-6 rounded-2xl border border-gold/20 shadow-sm relative">
+            <div class="max-w-sm mx-auto bg-[#12244C]/95 p-6 rounded-2xl border border-gold/20 shadow-sm relative">
                 <!-- Top Date Banner -->
                 <div class="flex items-center justify-between border-b border-slateDark/20 pb-3 mb-4 font-serif">
                     <span class="text-xs uppercase tracking-widest text-slateDark/70">SÁBADO</span>
@@ -254,10 +254,10 @@
                     <div class="p-1">20</div>
                     
                     <!-- Highlighted Date: 21 with Red Heart -->
-                    <div class="relative p-1 flex items-center justify-center font-bold text-red-400">
+                    <div class="relative p-1 flex items-center justify-center font-bold text-slate-100">
                         <span class="relative z-10">21</span>
                         <!-- SVG Heart Outline in Red -->
-                        <svg class="absolute inset-0 w-full h-full text-red-400 scale-125 pointer-events-none drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="absolute inset-0 w-full h-full text-slate-100 scale-125 pointer-events-none drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                     </div>
@@ -308,8 +308,8 @@
                         <a href="https://maps.app.goo.gl/UT7s9SwUBvTgqtya7" 
                            target="_blank" 
                            rel="noopener noreferrer" 
-                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#15161A] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
-                            <svg class="text-gold group-hover:text-[#15161A] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
+                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#0A1833] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
+                            <svg class="text-gold group-hover:text-[#0A1833] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
                             <span>Ver ubicación en Google Maps</span>
                         </a>
                     </div>
@@ -336,8 +336,8 @@
                         <a href="https://maps.app.goo.gl/z6CTh4fcW3beVi4SA" 
                            target="_blank" 
                            rel="noopener noreferrer" 
-                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#15161A] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
-                            <svg class="text-gold group-hover:text-[#15161A] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
+                           class="group w-full inline-flex items-center justify-center space-x-2 bg-tint hover:bg-gold text-slateDark hover:text-[#0A1833] py-3 px-6 rounded-2xl border border-tintDark transition-all duration-300 shadow-sm text-xs uppercase tracking-wider font-medium">
+                            <svg class="text-gold group-hover:text-[#0A1833] inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
                             <span>Ver ubicación en Google Maps</span>
                         </a>
                     </div>
@@ -350,10 +350,10 @@
         <!-- DRESS CODE & GIFT DETAILS -->
         <section class="grid sm:grid-cols-2 gap-6">
             <!-- Dress Code -->
-            <div class="bg-[#26272D]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
+            <div class="bg-[#12244C]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
                 <svg class="text-2xl text-gold mb-3 inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M224 248a120 120 0 1 1 0-240 120 120 0 1 1 0 240zm-30.5 56l61 0c9.7 0 17.5 7.8 17.5 17.5 0 4.2-1.5 8.2-4.2 11.4l-27.4 32 31 115.1 .6 0 34.6-138.5c2.2-8.7 11.1-14 19.5-10.8 61.9 23.6 105.9 83.6 105.9 153.8 0 15.1-12.3 27.4-27.4 27.4L43.4 512c-15.1 0-27.4-12.3-27.4-27.4 0-70.2 44-130.2 105.9-153.8 8.4-3.2 17.3 2.1 19.5 10.8l34.6 138.5 .6 0 31-115.1-27.4-32c-2.7-3.2-4.2-7.2-4.2-11.4 0-9.7 7.8-17.5 17.5-17.5z"/></svg>
                 <h4 class="font-serif text-xl text-slateDark mb-1">Código de Vestimenta</h4>
-                <p class="text-xs uppercase tracking-widest text-deep font-semibold mb-2"> Etiqueta / Formal</p>
+                <p class="text-xs uppercase tracking-widest text-deep font-semibold mb-2">Rigurosa Etiqueta / Formal</p>
                 <p class="text-xs text-slateMuted">
                     Queremos que lucir espectaculares sea parte del recuerdo. Traje formal para caballeros y vestido para damas.
                     Con cariño nos reservamos los colores Blanco y Azul.
@@ -365,7 +365,7 @@
             </div>
 
             <!-- Gift / Lluvia de Sobres -->
-            <div class="bg-[#26272D]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
+            <div class="bg-[#12244C]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-tintDark">
                 <svg class="text-2xl text-gold mb-3 inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M288 33.9L96.4 175.8 254.5 293c5.3 3.9 11.2 6.9 17.5 8.7L272 464c0 5.5 .5 10.8 1.3 16L96 480c-35.3 0-64-28.7-64-64l0-239.9c0-20.3 9.6-39.4 25.9-51.4L254.5-21c9.7-7.2 21.4-11 33.5-11s23.8 3.9 33.5 11L518.1 124.7c7.2 5.3 13.1 12 17.4 19.6-2.5-.2-5-.3-7.5-.3L436.6 144 288 33.9zM320 240c0-26.5 21.5-48 48-48l160 0c26.5 0 48 21.5 48 48l0 224c0 26.5-21.5 48-48 48l-160 0c-26.5 0-48-21.5-48-48l0-224zm80 16c-13.3 0-24 10.7-24 24s10.7 24 24 24l96 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-96 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l56 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-56 0z"/></svg>
                 <h4 class="font-serif text-xl text-slateDark mb-1">Regalos</h4>
                 <p class="text-xs uppercase tracking-widest text-deep font-semibold mb-2">Lluvia de Sobres</p>
@@ -374,10 +374,10 @@
                 </p>
                 <div class="flex items-center justify-center mt-4">
                     <svg class="h-10 w-auto" viewBox="0 0 60 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sobre con corazón">
-                        <rect x="3" y="5" width="54" height="34" rx="4" fill="#33343B" stroke="#F6B08A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M3.8 7.5L30 25L56.2 7.5" stroke="#F6B08A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M4 37L22 21M56 37L38 21" stroke="#F6B08A" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
-                        <path d="M30 31.5C30 31.5 24.5 27.6 24.5 24.4C24.5 22.6 25.9 21.4 27.5 21.4C28.6 21.4 29.5 22 30 22.9C30.5 22 31.4 21.4 32.5 21.4C34.1 21.4 35.5 22.6 35.5 24.4C35.5 27.6 30 31.5 30 31.5Z" fill="#F6B08A"/>
+                        <rect x="3" y="5" width="54" height="34" rx="4" fill="#1B3263" stroke="#C9D1DC" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M3.8 7.5L30 25L56.2 7.5" stroke="#C9D1DC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 37L22 21M56 37L38 21" stroke="#C9D1DC" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+                        <path d="M30 31.5C30 31.5 24.5 27.6 24.5 24.4C24.5 22.6 25.9 21.4 27.5 21.4C28.6 21.4 29.5 22 30 22.9C30.5 22 31.4 21.4 32.5 21.4C34.1 21.4 35.5 22.6 35.5 24.4C35.5 27.6 30 31.5 30 31.5Z" fill="#C9D1DC"/>
                     </svg>
                 </div>
             </div>
@@ -404,7 +404,7 @@
                     <a href="https://forms.gle/TiX12SA6t9xrJ1su6" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="w-full sm:w-auto min-w-[220px] bg-gold hover:bg-goldHover text-[#15161A] py-4 px-8 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg font-sans text-xs uppercase tracking-widest font-semibold flex items-center justify-center space-x-2 transform hover:-translate-y-0.5">
+                       class="w-full sm:w-auto min-w-[220px] bg-gold hover:bg-goldHover text-[#0A1833] py-4 px-8 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg font-sans text-xs uppercase tracking-widest font-semibold flex items-center justify-center space-x-2 transform hover:-translate-y-0.5">
                         <svg class="text-base inline-block" style="height:1em;width:auto;vertical-align:-0.125em" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path fill="currentColor" d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zM374 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L221.1 315.2 169 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.8 7.5 18.8 7s13.4-4.1 17.5-9.8L379.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"/></svg>
                         <span>Confirmar Asistencia</span>
                     </a>
@@ -519,7 +519,7 @@
                 this.spin = Math.random() * 0.02 - 0.01;
                 this.opacity = Math.random() * 0.4 + 0.5;
                 // Pétalos suaves sobre fondo negro perla
-                this.color = Math.random() > 0.5 ? '#F6B08A' : '#E8D9D0';
+                this.color = Math.random() > 0.5 ? '#C9D1DC' : '#FFFFFF';
             }
 
             update() {
