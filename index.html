@@ -50,6 +50,182 @@
     
     <!-- Custom Styles -->
     <style>
+
+        /* --- ESTILOS DE LA ANIMACIÓN DEL SOBRE --- */
+        .envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, #112240 0%, #060E22 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .envelope-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 340px;
+            height: 230px;
+            background: #0d1f3b;
+            border-radius: 6px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(212,175,106,0.4);
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        @media (min-width: 480px) {
+            .envelope-container {
+                width: 420px;
+                height: 280px;
+            }
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.02);
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #0b172c;
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+        .envelope-card {
+            position: absolute;
+            bottom: 15px;
+            left: 5%;
+            width: 90%;
+            height: 85%;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+            border: 1px solid #D4AF6A;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .envelope-card-names {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.8rem;
+            color: #0A1833;
+            margin-bottom: 0px;
+            line-height: 1;
+        }
+
+        .envelope-card-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #B8913F;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .envelope-front {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(135deg, #1B3263 0%, #0B1B3F 100%);
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+            z-index: 3;
+            box-shadow: inset 0 2px 5px rgba(212,175,106,0.2);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            background: linear-gradient(145deg, #2E4778 0%, #112240 100%);
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.8s ease-in-out;
+            z-index: 5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .envelope-seal {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle at 30% 30%, #F2DDA6 0%, #D4AF6A 60%, #B8913F 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 3px rgba(255,255,255,0.6), inset 0 -2px 3px rgba(0,0,0,0.4);
+            z-index: 6;
+            animation: pulseSeal 2s infinite ease-in-out;
+        }
+
+        .envelope-seal span {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #0A1833;
+            letter-spacing: 1px;
+        }
+
+        .envelope-instruction {
+            margin-top: 25px;
+            font-family: 'Montserrat', sans-serif;
+            color: #F2DDA6;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInOut 2s infinite ease-in-out;
+            text-align: center;
+        }
+
+        @keyframes pulseSeal {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.06); }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .envelope-container.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-container.open .envelope-card {
+            transform: translateY(-115px);
+            z-index: 4;
+        }
+
         /* Fondo azul marino moderno con brillo dorado sutil */
         body {
             background-color: #060E22;
@@ -118,10 +294,48 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #E8CC8E;
         }
+
+        /* Animación de latido para el corazón dorado */
+        @keyframes heartbeatGold {
+            0%, 100% {
+                transform: scale(1.25);
+            }
+            25% {
+                transform: scale(1.42);
+            }
+            45% {
+                transform: scale(1.25);
+            }
+            65% {
+                transform: scale(1.38);
+            }
+        }
+
+        .heart-beat-gold {
+            animation: heartbeatGold 1.8s infinite ease-in-out;
+            transform-origin: center;
+        }
     </style>
 </head>
-<body class="text-slateDark font-sans antialiased relative overflow-x-hidden">
 
+
+<body class="text-slateDark font-sans antialiased relative overflow-x-hidden">
+<!-- PANTALLA INICIAL DE APERTURA DE SOBRE -->
+    <div id="envelope-overlay" class="envelope-overlay">
+        <div class="envelope-container" id="envelopeContainer" onclick="openEnvelope()">
+            <div class="envelope-back"></div>
+            <div class="envelope-card">
+                <span class="envelope-card-names">Johana &amp; Oscar</span>
+                <span class="envelope-card-subtitle">Nuestra Boda</span>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-flap" id="envelopeFlap"></div>
+            <div class="envelope-seal" id="envelopeSeal">
+                <span>J &amp; O</span>
+            </div>
+        </div>
+        <div class="envelope-instruction">Toca el sello para abrir tu invitación</div>
+    </div>
     <!-- Petals Canvas Animation -->
     <canvas id="petals-canvas"></canvas>
 
@@ -242,7 +456,7 @@
                     <div>MIÉ</div>
                     <div>JUE</div>
                     <div>VIE</div>
-                    <div>SÁB</div>
+                    <div class="text-gold font-bold">SÁB</div>
                 </div>
 
                 <!-- Calendar Grid for August 2027 (Starts Sunday Aug 1) -->
@@ -268,11 +482,11 @@
                     <div class="p-1">19</div>
                     <div class="p-1">20</div>
                     
-                    <!-- Highlighted Date: 21 with Red Heart -->
-                    <div class="relative p-1 flex items-center justify-center font-bold text-slate-100">
-                        <span class="relative z-10">21</span>
-                        <!-- SVG Heart Outline in Red -->
-                        <svg class="absolute inset-0 w-full h-full text-slate-100 scale-125 pointer-events-none drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Highlighted Date: 21 with Beating Gold Heart -->
+                    <div class="relative p-1 flex items-center justify-center font-bold text-gold">
+                        <span class="relative z-10 drop-shadow-sm">21</span>
+                        <!-- SVG Heart Outline in Gold with Beating Animation -->
+                        <svg class="absolute inset-0 w-full h-full text-gold heart-beat-gold pointer-events-none drop-shadow-[0_0_6px_rgba(212,175,106,0.65)]" viewBox="0 0 24 24" fill="rgba(212, 175, 106, 0.14)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                     </div>
@@ -580,6 +794,33 @@
         window.onload = function() {
             animatePetals();
         };
+
+        // --- 4. ANIMACIÓN DE APERTURA DE SOBRE Y MÚSICA ---
+        function openEnvelope() {
+            const container = document.getElementById('envelopeContainer');
+            const overlay = document.getElementById('envelope-overlay');
+
+            // Activa la animación del sobre
+            container.classList.add('open');
+
+            // Inicia la música automáticamente al abrir el sobre
+            if (!isPlaying) {
+                bgMusic.play().then(() => {
+                    showMusicIcon(true);
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log("Audio play prevented.");
+                });
+            }
+
+            // Oculta la capa del sobre después de la animación para ver la invitación
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 800);
+            }, 1200);
+        }
     </script>
 </body>
 </html>
