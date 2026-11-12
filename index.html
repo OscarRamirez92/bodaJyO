@@ -28,8 +28,9 @@
                         blushDark: '#E8D5D0',
                         sage: '#8A9A86',
                         sageLight: '#EBF0EA',
-                        gold: '#C9D1DC',
-                        goldHover: '#E4E9F0',
+                        gold: '#D4AF6A',
+                        goldHover: '#E8CC8E',
+                        silver: '#C9D1DC',
                         slateDark: '#F8FAFC',
                         slateMuted: '#AEB9CC',
                         tint: '#1B3263',
@@ -49,15 +50,28 @@
     
     <!-- Custom Styles -->
     <style>
-        /* Fondo azul marino con destellos suaves en plata */
+        /* Fondo azul marino moderno con brillo dorado sutil */
         body {
-            background-color: #0A1833;
+            background-color: #060E22;
             background-image:
-                radial-gradient(circle at 15% 8%, rgba(60,105,200,0.28), transparent 50%),
-                radial-gradient(circle at 88% 55%, rgba(201,209,220,0.10), transparent 45%),
-                radial-gradient(circle at 20% 95%, rgba(60,105,200,0.22), transparent 50%);
+                radial-gradient(ellipse 70% 40% at 50% 0%, rgba(212,175,106,0.14), transparent 70%),
+                radial-gradient(circle at 12% 12%, rgba(53,92,181,0.38), transparent 48%),
+                radial-gradient(circle at 92% 62%, rgba(53,92,181,0.24), transparent 46%),
+                linear-gradient(180deg, #0B1B3F 0%, #081530 50%, #050B1D 100%);
             background-attachment: fixed;
         }
+
+        /* Texto dorado metalizado */
+        .gold-text {
+            background: linear-gradient(100deg, #F2DDA6 0%, #D4AF6A 45%, #B8913F 70%, #E8CC8E 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Línea dorada decorativa */
+        .gold-line { background: linear-gradient(90deg, transparent, #D4AF6A, transparent); }
 
         /* Floating Petals Canvas */
         #petals-canvas {
@@ -72,10 +86,11 @@
 
         /* Glassmorphism Effect */
         .glass-card {
-            background: rgba(18, 36, 76, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(201,209,220, 0.30);
+            background: linear-gradient(150deg, rgba(24,46,98,0.88), rgba(10,24,54,0.94));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212,175,106,0.26);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
         }
 
         /* Elegant Shadow */
@@ -85,7 +100,7 @@
 
         /* Smooth Text Selection */
         ::selection {
-            background-color: #C9D1DC;
+            background-color: #D4AF6A;
             color: #0A1833;
         }
 
@@ -97,11 +112,11 @@
             background: #0A1833;
         }
         ::-webkit-scrollbar-thumb {
-            background: #C9D1DC;
+            background: #D4AF6A;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #EEF1F6;
+            background: #E8CC8E;
         }
     </style>
 </head>
@@ -132,7 +147,7 @@
                 <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto stroke-gold">
                     <path d="M100 30C80 30 60 10 30 10C10 10 0 30 0 30C0 30 10 50 30 50C60 50 80 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
                     <path d="M100 30C120 30 140 10 170 10C190 10 200 30 200 30C200 30 190 50 170 50C140 50 120 30 100 30Z" stroke-width="1.2" stroke-linecap="round"/>
-                    <circle cx="100" cy="30" r="4" fill="#C9D1DC"/>
+                    <circle cx="100" cy="30" r="4" fill="#D4AF6A"/>
                     <circle cx="70" cy="25" r="2" fill="#EEF1F6"/>
                     <circle cx="130" cy="25" r="2" fill="#EEF1F6"/>
                 </svg>
@@ -143,7 +158,7 @@
             </p>
 
             <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl text-cream font-light tracking-tight my-2">
-                Johana <span class="font-script text-gold text-4xl sm:text-6xl md:text-7xl block sm:inline my-2 sm:my-0">&</span> Oscar
+                Johana <span class="font-script gold-text text-4xl sm:text-6xl md:text-7xl block sm:inline my-2 sm:my-0">&</span> Oscar
             </h1>
 
             <p class="font-serif italic text-lg sm:text-xl md:text-2xl text-cream/80 max-w-md mx-auto my-6 font-light px-4">
@@ -154,7 +169,7 @@
             <div class="mt-4 inline-flex items-center space-x-3 border-y border-gold/40 py-2 px-8">
                 <span class="font-sans uppercase tracking-widest text-xs md:text-sm font-semibold text-cream">Sábado</span>
                 <span class="text-gold text-xs">•</span>
-                <span class="font-serif text-2xl md:text-3xl text-gold font-semibold tracking-wider">21 DE AGOSTO</span>
+                <span class="font-serif text-2xl md:text-3xl gold-text font-semibold tracking-wider">21 DE AGOSTO</span>
                 <span class="text-gold text-xs">•</span>
                 <span class="font-sans uppercase tracking-widest text-xs md:text-sm font-semibold text-cream">2027</span>
             </div>
@@ -178,19 +193,19 @@
             <!-- Timer Grid -->
             <div id="countdown" class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-xl mx-auto">
                 <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
-                    <span id="days" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span id="days" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold gold-text">00</span>
                     <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Días</span>
                 </div>
                 <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
-                    <span id="hours" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span id="hours" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold gold-text">00</span>
                     <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Horas</span>
                 </div>
                 <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
-                    <span id="minutes" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span id="minutes" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold gold-text">00</span>
                     <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Minutos</span>
                 </div>
                 <div class="bg-black/30 rounded-2xl p-4 border border-tintDark shadow-sm flex flex-col items-center justify-center">
-                    <span id="seconds" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">00</span>
+                    <span id="seconds" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold gold-text">00</span>
                     <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mt-1">Segundos</span>
                 </div>
             </div>
@@ -281,7 +296,7 @@
         <section class="space-y-8">
             <div class="text-center space-y-2">
                 <h2 class="font-serif text-3xl md:text-4xl text-cream">Dónde & Cuándo</h2>
-                <div class="w-12 h-0.5 bg-gold mx-auto rounded-full"></div>
+                <div class="w-16 h-px gold-line mx-auto"></div>
                 <p class="text-xs uppercase tracking-widest text-cream/70">Detalles del Evento</p>
             </div>
 
@@ -374,10 +389,10 @@
                 </p>
                 <div class="flex items-center justify-center mt-4">
                     <svg class="h-10 w-auto" viewBox="0 0 60 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sobre con corazón">
-                        <rect x="3" y="5" width="54" height="34" rx="4" fill="#1B3263" stroke="#C9D1DC" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M3.8 7.5L30 25L56.2 7.5" stroke="#C9D1DC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M4 37L22 21M56 37L38 21" stroke="#C9D1DC" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
-                        <path d="M30 31.5C30 31.5 24.5 27.6 24.5 24.4C24.5 22.6 25.9 21.4 27.5 21.4C28.6 21.4 29.5 22 30 22.9C30.5 22 31.4 21.4 32.5 21.4C34.1 21.4 35.5 22.6 35.5 24.4C35.5 27.6 30 31.5 30 31.5Z" fill="#C9D1DC"/>
+                        <rect x="3" y="5" width="54" height="34" rx="4" fill="#12244C" stroke="#D4AF6A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M3.8 7.5L30 25L56.2 7.5" stroke="#D4AF6A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 37L22 21M56 37L38 21" stroke="#D4AF6A" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+                        <path d="M30 31.5C30 31.5 24.5 27.6 24.5 24.4C24.5 22.6 25.9 21.4 27.5 21.4C28.6 21.4 29.5 22 30 22.9C30.5 22 31.4 21.4 32.5 21.4C34.1 21.4 35.5 22.6 35.5 24.4C35.5 27.6 30 31.5 30 31.5Z" fill="#D4AF6A"/>
                     </svg>
                 </div>
             </div>
@@ -425,7 +440,7 @@
 
         <!-- FOOTER / CLOSING -->
         <footer class="text-center space-y-4 pt-8 pb-12">
-            <p class="font-script text-4xl text-gold">Johana & Oscar</p>
+            <p class="font-script text-4xl gold-text">Johana & Oscar</p>
             <p class="text-xs uppercase tracking-widest text-cream/70">
                 ¡Esperamos contar con tu valiosa presencia!
             </p>
@@ -518,8 +533,8 @@
                 this.angle = Math.random() * 360;
                 this.spin = Math.random() * 0.02 - 0.01;
                 this.opacity = Math.random() * 0.4 + 0.5;
-                // Pétalos suaves sobre fondo negro perla
-                this.color = Math.random() > 0.5 ? '#C9D1DC' : '#FFFFFF';
+                // Pétalos plata, blancos y dorados sobre azul marino
+                const r = Math.random(); this.color = r > 0.66 ? '#D4AF6A' : (r > 0.33 ? '#C9D1DC' : '#FFFFFF');
             }
 
             update() {
